@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.local.test.persistence.UserMapper">
+
+	<insert id="addUser">
+	INSERT INTO test.user(name, age, sex)
+     VALUES (#{name}, #{age},#{sex});
+	</insert>
+
+	<select id="allUsers" resultType="java.util.LinkedHashMap">
+	SELECT *
+    FROM test.user order by name;
+	</select>
+	
+	<select id="ageIn" resultType="java.util.LinkedHashMap">
+	select *  
+		FROM test.user where age between #{min} and #{max};
+	</select>
+
+</mapper>

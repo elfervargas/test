@@ -1,4 +1,4 @@
-package com.local.test.util;
+package com.test.local.response;
 
 public class Response {
 	private boolean status;
