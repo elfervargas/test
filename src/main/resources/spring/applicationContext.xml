@@ -7,33 +7,33 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
-	<context:annotation-config />
-	<context:property-placeholder location="classpath:db/postgres.properties" />
-	<tx:annotation-driven transaction-manager="transactionManager" />
+<!-- 	<context:annotation-config /> -->
+	<context:property-placeholder location="classpath:db/mysql.properties" />
 
-<!-- 	<bean id="dataSource" -->
-<!-- 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${driverClassName}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+	</bean>
+	
+	<!-- Commons DBCP DataSource for PostgreSQL -->
+<!-- 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" -->
+<!-- 		destroy-method="close"> -->
+<!-- 		<property name="initialSize" value="${initialSize}" /> -->
+<!-- 		<property name="maxTotal" value="${maxTotal}" /> -->
+<!-- 		<property name="maxIdle" value="${maxIdle}" /> -->
+<!-- 		<property name="minIdle" value="${minIdle}" /> -->
+<!-- 		<property name="maxWaitMillis" value="${maxWaitMillis}" /> -->
 <!-- 		<property name="driverClassName" value="${driverClassName}" /> -->
 <!-- 		<property name="url" value="${url}" /> -->
 <!-- 		<property name="username" value="${usernm}" /> -->
 <!-- 		<property name="password" value="${password}" /> -->
 <!-- 	</bean> -->
 	
-	<!-- Commons DBCP DataSource for PostgreSQL -->
-	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
-		destroy-method="close">
-		<property name="initialSize" value="${initialSize}" />
-		<property name="maxTotal" value="${maxTotal}" />
-		<property name="maxIdle" value="${maxIdle}" />
-		<property name="minIdle" value="${minIdle}" />
-		<property name="maxWaitMillis" value="${maxWaitMillis}" />
-		<property name="driverClassName" value="${driverClassName}" />
-		<property name="url" value="${url}" />
-		<property name="username" value="${usernm}" />
-		<property name="password" value="${password}" />
-	</bean>
-
-	<bean id="transactionManeger"
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
@@ -42,7 +42,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="typeAliasesPackage" value="com.local.test.domain" />
 	</bean>
-
+	
 	<bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.local.test.persistence" />
 	</bean>

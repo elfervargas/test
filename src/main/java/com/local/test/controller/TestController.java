@@ -36,7 +36,8 @@ public class TestController {
 			return ResponseFactory.unsuccessfulResponse("nothing to find");
 		Map<String, Object> data = new HashMap();
 		data.put("data", data);
-		return ResponseFactory.successfulResponse(data, "ok");
+		//return ResponseFactory.successfulResponse(data, "ok");
+		return users;
 	}
 	
 	@RequestMapping(value = "ageIn", method = RequestMethod.POST)
@@ -47,5 +48,11 @@ public class TestController {
 		Map<String, Object> data = new HashMap();
 		data.put("data", data);
 		return ResponseFactory.successfulResponse(data, "ok");
+	}
+	
+	@RequestMapping(value = "searchById", method = RequestMethod.POST)
+	public Object searById(@RequestBody int id) {
+		com.local.test.domain.User user = service.searchById(id);
+		return user;
 	}
 }
