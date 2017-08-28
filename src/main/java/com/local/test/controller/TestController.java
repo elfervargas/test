@@ -55,4 +55,16 @@ public class TestController {
 		com.local.test.domain.User user = service.searchById(id);
 		return user;
 	}
+	
+	@RequestMapping(value = "searchQuery", method = RequestMethod.POST)
+	public Object searchQuery(@RequestBody String query) {
+		List<Map<String, Object>> users = service.genericSearch(query);
+		return users;
+	}
+	
+	@RequestMapping(value = "insertQuery", method = RequestMethod.POST)
+	public Object inserQuery(@RequestBody String query) {
+		Response response = service.insertQuery(query);
+		return response;
+	}
 }

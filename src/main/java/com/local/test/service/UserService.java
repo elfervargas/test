@@ -12,4 +12,6 @@ public interface UserService {
 	List<Map<String, Object>> allUsers();
 	List<Map<String, Object>> ageIn(AgeIn ageIn);
 	com.local.test.domain.User searchById(int id);
+	List<Map<String, Object>> genericSearch(String query);
+	Response insertQuery(String query);
 }
